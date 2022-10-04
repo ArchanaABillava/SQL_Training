@@ -84,8 +84,8 @@ insert into demo values(3,'Sam')
 --alter - add a column
 alter table demo add Dept varchar(10)
 --update 
-update demo set Dept=100 where id<3;
-update demo set Dept=101 where id=3;
+--update demo set Dept=100 where id<3;
+--update demo set Dept=101 where id=3;
 
 --alter - drop a column
 alter table demo drop column name
@@ -102,3 +102,74 @@ select * from Employee order by EDeptNo desc
 select * from Employee order by EDeptNo,EAge
 select * from Employee order by EAge,EDeptNo
 select * from Employee order by EAge,EDeptNo desc
+
+--Aggregate func -sum ,count,min,max,avg
+select avg(EAge) as 'Avg age ' from Employee
+-- Group by
+select EDesignation,avg(EAge) as 'Avg age ' from Employee group by EDesignation
+--apply a condition -having clause
+select EDesignation,avg(EAge) as 'Avg age ' from Employee group by EDesignation having avg(EAge)>23
+
+--Btw And
+select * from Employee where EDeptNo between 101 and 104
+select * from Employee where EDeptNo not between 101 and 104
+
+--IN and Not IN
+select *from Employee where EDeptNo IN(101,103)
+select *from Employee where EName Not IN('John','Sam','Lea')
+
+--Schema -default schema dbo
+--Staff Schema
+create schema Staff
+create table Staff.Registration
+(
+RID int,
+RName varchar(20)
+)
+--Student schema
+create schema Students
+create table Students.Registration
+(
+RID int,
+RName varchar(20)
+)
+--Admin Schema
+create schema Admin
+create table Admin.Registration
+(
+RID int,
+RName varchar(20)
+)
+
+--drop schema
+
+drop table Staff.Registration
+drop schema if exists Staff
+
+--Cascading Referential Integrity
+--tables-orders and customers
+create table customer 
+(
+CID int primary key,
+CName varchar(20) Not Null,
+CAddress varchar(25) Not Null,
+OrderID int unique Not Null
+)
+create table orders
+(
+OrderNo int primary key IDENTITY(1,1),
+OrderID int references customer(OrderID),
+CID int references customer(CID)
+)
+insert into customer values(1,'John','Bangalore ',103);
+insert into customer values(2,'Roman','Mangalore ',104);
+insert into customer values(3,'Mark','Udupi ',105);
+insert into customer values(4,'Ben','Karkala ',107);
+
+
+select * from customer
+select * from orders
+
+update customers set CID=10 where CID=100
+
+delete from customers where CID=101
