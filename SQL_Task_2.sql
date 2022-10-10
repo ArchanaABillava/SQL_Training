@@ -51,3 +51,27 @@ insert into people values(NEXT VALUE FOR TrainID,'Sam')
 insert into people values(NEXT VALUE FOR TrainID,'Paul')
 insert into people values(NEXT VALUE FOR TrainID,'James')
 select * from people
+
+--String  function
+SELECT CHAR(65) AS NumberCodeToCharacter;
+
+--Math function
+Select abs(-6);
+Select power(2,5);
+
+--Datetime functions
+CREATE TABLE work (
+WORKER_ID INT NOT NULL PRIMARY KEY ,
+FIRST_NAME CHAR(25),
+LAST_NAME CHAR(25),
+SALARY INT,
+JOINING_DATE DATETIME,
+DEPARTMENT CHAR(25)
+);
+INSERT INTO Work
+(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+(001,'NIHARIKA', 'ARORA', 20000, '2013-02-25 09:00:00', 'HR'),
+(002,'AYUSHI', 'GURONDIA', 5000, '2015-02-10 09:00:00', 'ADMIN'),
+(003,'DEVYANI', 'PATIDAR', 18000, '2014-05-02 09:00:00', 'ACCOUNT');
+
+select * from work
